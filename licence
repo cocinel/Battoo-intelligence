@@ -1,0 +1,104 @@
+# Battoo Intelligence Proprietary License v1.0
+
+Copyright (c) 2026 Battoo / Cocinel
+
+All rights reserved.
+
+## 1. Proprietary Software
+
+Battoo Intelligence is proprietary software developed for the Battoo ecosystem.
+
+The source code, architecture, algorithms, software components, prompts, workflows, data models, documentation, interfaces, APIs, configurations and other original elements contained in this repository are protected by applicable intellectual property laws.
+
+Except where expressly authorized in writing by the rights holder, no rights are granted to use, copy, modify, reproduce, distribute, publish, sublicense, sell, rent, lease, transfer or commercially exploit this software or any substantial part of it.
+
+## 2. Permitted Use
+
+Access to this repository does not, by itself, grant any license or right to use the software.
+
+The rights holder may authorize specific individuals, companies, developers or partners to access, evaluate, develop, integrate or use Battoo Intelligence under separate written terms.
+
+Any such authorization must be expressly granted by the rights holder.
+
+## 3. Restrictions
+
+Without prior written authorization, you may not:
+
+* copy or reproduce the software;
+* modify or create derivative works;
+* redistribute or publish the source code;
+* incorporate the software into another commercial product;
+* sell, sublicense, rent or lease the software;
+* use the software to create a competing product or service;
+* remove copyright, ownership or proprietary notices;
+* disclose confidential or non-public components of the project.
+
+## 4. Open Source Components
+
+Battoo Intelligence may incorporate third-party open-source software or libraries.
+
+Such components remain subject to their respective licenses.
+
+Nothing in this license is intended to restrict rights granted by an applicable third-party open-source license.
+
+## 5. Intellectual Property
+
+All intellectual property rights in the original components of Battoo Intelligence remain with the rights holder, unless expressly stated otherwise.
+
+This includes, where applicable:
+
+* source code;
+* software architecture;
+* algorithms;
+* AI agents;
+* proprietary prompts;
+* workflows;
+* data structures;
+* database schemas;
+* APIs;
+* interfaces;
+* documentation;
+* automation logic;
+* proprietary business logic.
+
+## 6. No Warranty
+
+The software is provided "as is", without warranties of any kind, whether express or implied, to the maximum extent permitted by applicable law.
+
+The rights holder shall not be liable for damages resulting from the unauthorized use of the software.
+
+## 7. Termination
+
+Any authorization granted under this license terminates automatically if the terms of the authorization are violated.
+
+Upon termination, the authorized user must cease the unauthorized use of the software and, where applicable, remove copies that are no longer authorized.
+
+## 8. Commercial Use
+
+Commercial use of Battoo Intelligence requires explicit written authorization from the rights holder unless otherwise provided by a separate agreement.
+
+Commercial authorization may be granted through a separate commercial license, partnership agreement, SaaS agreement, development agreement or other written contract.
+
+## 9. Contributions
+
+Unless otherwise agreed in writing, contributions submitted to this repository may be subject to separate contribution terms.
+
+Submitting a contribution does not automatically transfer ownership of unrelated intellectual property to the rights holder.
+
+## 10. Contact
+
+For licensing, partnership, commercial use or other authorization requests, contact the rights holder through the official Battoo channels.
+
+## 11. Reservation of Rights
+
+All rights not expressly granted by this license are reserved.
+
+Unauthorized use, reproduction, distribution or commercial exploitation may constitute an infringement of applicable intellectual property rights.
+
+---
+
+**Battoo Intelligence**
+
+Copyright © 2026 Battoo / Cocinel
+
+All rights reserved.
