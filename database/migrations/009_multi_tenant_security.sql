@@ -6,9 +6,28 @@
 --   ai_workspace_members links users to workspaces.
 --   Knowledge data is visible only when the current user is a member
 --   of the row's workspace.
---
--- This migration assumes Supabase Auth and a workspace membership table
--- named ai_workspace_members with columns: workspace_id, user_id.
+
+-- Workspace membership is created here because RLS depends on it.
+-- auth.users is the Supabase Auth identity source.
+CREATE TABLE IF NOT EXISTS ai_workspace_members (
+    workspace_id UUID NOT NULL
+        REFERENCES ai_workspaces(id)
+        ON DELETE CASCADE,
+
+    user_id UUID NOT NULL
+        REFERENCES auth.users(id)
+        ON DELETE CASCADE,
+
+    role TEXT NOT NULL DEFAULT 'member'
+        CHECK (role IN ('owner', 'admin', 'member', 'viewer')),
+
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+    PRIMARY KEY (workspace_id, user_id)
+);
+
+CREATE INDEX IF NOT EXISTS idx_ai_workspace_members_user
+ON ai_workspace_members(user_id);
 
 -- Helper: determine whether the authenticated user belongs to a workspace.
 CREATE OR REPLACE FUNCTION is_workspace_member(p_workspace_id UUID)
@@ -29,13 +48,25 @@ $$;
 REVOKE ALL ON FUNCTION is_workspace_member(UUID) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION is_workspace_member(UUID) TO authenticated;
 
+-- Enable RLS on membership itself.
+ALTER TABLE ai_workspace_members ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS workspace_members_self_or_same_workspace ON ai_workspace_members;
+CREATE POLICY workspace_members_self_or_same_workspace
+ON ai_workspace_members
+FOR SELECT
+TO authenticated
+USING (
+    user_id = auth.uid()
+    OR is_workspace_member(workspace_id)
+);
+
 -- Enable RLS on all tenant-scoped knowledge tables.
 ALTER TABLE knowledge_sources ENABLE ROW LEVEL SECURITY;
 ALTER TABLE knowledge_documents ENABLE ROW LEVEL SECURITY;
 ALTER TABLE knowledge_chunks ENABLE ROW LEVEL SECURITY;
 ALTER TABLE knowledge_embeddings ENABLE ROW LEVEL SECURITY;
 
--- Policies are deliberately recreated so this migration is safe to re-run.
 DROP POLICY IF EXISTS knowledge_sources_workspace_isolation ON knowledge_sources;
 CREATE POLICY knowledge_sources_workspace_isolation
 ON knowledge_sources
@@ -69,8 +100,6 @@ USING (is_workspace_member(workspace_id))
 WITH CHECK (is_workspace_member(workspace_id));
 
 -- Secure the vector search function itself.
--- The function keeps workspace_id as an explicit parameter and verifies
--- membership before returning any vector matches.
 CREATE OR REPLACE FUNCTION match_knowledge_embeddings(
     p_workspace_id UUID,
     p_query_embedding vector(1536),
